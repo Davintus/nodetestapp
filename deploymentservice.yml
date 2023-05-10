@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodeserver
-        image: thetips4you/nodeapp:latest
+        image: k3n3chukwu/nodeapp:latest
         ports:
         - containerPort: 3000
         
@@ -32,7 +32,11 @@ spec:
     app: nodeapp 
   type: LoadBalancer
   ports:
-  - protocol: TCP
-    port: 5000
+  - name: http
+    port: 80
     targetPort: 3000
-    nodePort: 31110
+  - name: https
+    port: 443
+    targetPort: 3000
+  selector:
+    app: nodeapp 
